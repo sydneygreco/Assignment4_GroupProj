@@ -9,21 +9,33 @@ body, html{
 
 header{
 	width: 100%;
+}
 
-}
-.mainContent{
-	padding: 16px;
-	margin-top: 50px;
-}
 .pagetitle{
-	font-family: 'Arial', sans-serif;
+	font-family: 'Questrial', sans-serif;
 	text-align: center;
-	position: fixed;
+	position: relative;
+    padding: 25px;
 	width: 100%;
 	top:0;
-	background-color: #C0C0C0;
-	box-shadow: 0px 10px 18px #888888;
+	background-color: #DD2E5D;
+/*	box-shadow: 0px 10px 18px #888888;*/
 }
-.footerDiv{
+
+.maincontent{
+	padding: 16px;
+/*	margin-top: 50px;*/
+}
+
+.footer{
 	text-align: center;
+    background-color:#DD2E5D;
+    padding: 15px;
+    font-family: 'Questrial', sans-serif;
+    position: relative;
+}
+
+#map{
+    height: 400px;
+    width: 100%;
 }
