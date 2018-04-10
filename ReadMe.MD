@@ -15,6 +15,7 @@ Photo Heat Map is a website that generates a map of the hottest location to take
 Questrial pulled from Google Fonts
 
 ## Reasources we used
-https://www.flickr.com/services/api/flickr.photos.geo.photosForLocation.html
-https://www.flickr.com/groups/51035612836@N01/discuss/72157629233549361/
-https://developers.google.com/maps/documentation/javascript/events
+* https://www.flickr.com/services/api/flickr.photos.geo.photosForLocation.html
+* https://www.flickr.com/groups/51035612836@N01/discuss/72157629233549361/
+* https://developers.google.com/maps/documentation/javascript/events
+* https://stackoverflow.com/questions/14229695/google-maps-api-throws-uncaught-referenceerror-google-is-not-defined-only-whe
