@@ -15,7 +15,7 @@ function init() {
 function fetchGeoImgs(lat,long,radius)
 {
   var xhr = new XMLHttpRequest();
-  var flickrQuery = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d3f2a78f874a236b04846f0422b43e20&has_geo=1&lat="+lat+"&lon="+long+"&radius="+radius+"&per_page=8&page=1&format=json&nojsoncallback=1"; 
+  var flickrQuery = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d3f2a78f874a236b04846f0422b43e20&has_geo=1&lat="+lat+"&lon="+long+"&radius="+radius+"&per_page=150&page=1&format=json&nojsoncallback=1"; 
 	xhr.open("GET", flickrQuery, true);
   xhr.send(null);
   
@@ -179,21 +179,24 @@ function initMap() {
 
 
     fetchGeoImgs(loc.lat ,loc.lng ,2);
+    
+    setTimeout(function(){ var heatmapData = [];
+
+      heatmapData = heat;
+      
+  
+      heatmap = new google.maps.visualization.HeatmapLayer({
+        //data: getPoints()
+        data: heatmapData
+      });
+      heatmap.setMap(map); }, 4000);
+    
   });
 
   map.addListener('dblclick', function() {
 
 
-    var heatmapData = [];
-
-    heatmapData = heat;
-    
-
-    heatmap = new google.maps.visualization.HeatmapLayer({
-      //data: getPoints()
-      data: heatmapData
-    });
-    heatmap.setMap(map);
+    deleteMarkers();
   });
 
   map.addListener('idle', function() {
