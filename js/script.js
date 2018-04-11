@@ -2,7 +2,7 @@ window.onload = init();
 
 var map;
 var markers = [];
-var xhr;
+var pinIcon = "images/iconSmall.png";
 
 
 function init() {
@@ -36,13 +36,11 @@ function fetchGeoImgs(lat,long,radius)
           (function(){
             var ii = i;
             setTimeout(function(){
-              //var LoCa = getImageLocation(photoArr[i].id);
-              var ID = photoArr[ii].id;
-              console.log("OPENING NEW REQUEST FOR ",i);
 
+              console.log("OPENING NEW REQUEST FOR ",i);
               
               var locationRequest = new XMLHttpRequest();
-              var locationQuery = "https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=d3f2a78f874a236b04846f0422b43e20&photo_id="+ID+"&format=json&nojsoncallback=1";
+              var locationQuery = "https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=d3f2a78f874a236b04846f0422b43e20&photo_id="+photoArr[ii].id+"&format=json&nojsoncallback=1";
               locationRequest.open("GET", locationQuery, true);
               locationRequest.send(null);
               locationRequest.onload = function()
@@ -52,9 +50,11 @@ function fetchGeoImgs(lat,long,radius)
                   var jsonObj2 = JSON.parse(locationRequest.responseText);
                   var lat1 = parseFloat(jsonObj2.photo.location.latitude);
                   var lng1 = parseFloat(jsonObj2.photo.location.longitude);
-                  addMarker(lat1,lng1); console.log("marker added for ",i);
-                  //var coordinates = new google.maps.LatLng(lat,lng);
-                  //console.log("LAT&LONG  ", [lat,lng]);
+
+                  addMarker(lat1,lng1,photoArr[ii].title); console.log("marker added for ",i);
+
+                  console.log("PHOTO ARR",photoArr[ii]);
+                  addInfoWindow(markers[i], photoArr[ii]);
                 } 
               }
             },1000);
@@ -214,13 +214,27 @@ function initMap() {
 }
 
 
-function addMarker(lat1,lng1) {
+function addMarker(lat1,lng1,name) {
   var marker = new google.maps.Marker({
     position: {lat: lat1, lng: lng1},
-    map: map
+    map: map,
+    title: name,
+    animation: google.maps.Animation.DROP,
+    icon: pinIcon
   });
 
   markers.push(marker);
+}
+
+function addInfoWindow(marker, photo) {
+
+  var infoWindow = new google.maps.InfoWindow({
+      content: '<IMG BORDER="0" ALIGN="Left" SRC="https://farm' + photo.farm + '.static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + photo.format + '.jpg;">'
+  });
+
+  google.maps.event.addListener(marker, 'click', function () {
+      infoWindow.open(map, marker);
+  });
 }
 
 function deleteMarkers() {
