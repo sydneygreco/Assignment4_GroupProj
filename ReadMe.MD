@@ -1,20 +1,33 @@
 # Dynamic Web Development - Group Project
 
 ## What is this repository for? 
-Photo Heat Map is a website that generates a map of the hottest location to take a picture.
+Hot Spot is a website that generates a map of the hottest location to take a picture.
 
 ## Style Guide
 ### Colour Pallete Hex Values
-* #8B39BA - Dark Orchid
-* #4A66D6 - Han Blue
-* #DD2E5D - Cherry 
-* #FBAD50 - Rajah 
-* #FCCC63 - Orange Yellow 
+* #F7EBEC - Isabelline (Header, Footer BGC and Text Fill)
+* #9B454B - Smokey Topaz (Land)
+* #BF5725 - Bittersweet Shimmer (Parks)
+* #F2A97B - Middle Yellow Red (Roads)
+* #220901 - Smokey Black (Highways and Text)
+* #6D2E2F - Wine (Transit)
+* #5E7393 - UCLA Blue (Water)
 * #000000 - Black
+
+### Colourblind Conversions of Hex Values
+* #A63603 (Highway)
+* #E6550D (Transit)
+* #FDAE6B (Parks)
+* #FDAE6C (Roads)
+* #FDD0A2 (Land)
+* #5E7393 (Water)
+
+
+
 ### Fonts 
 Questrial pulled from Google Fonts
 
-## Reasources we used
+## Resources we used
 * https://www.flickr.com/services/api/flickr.photos.geo.photosForLocation.html
 * https://www.flickr.com/groups/51035612836@N01/discuss/72157629233549361/
 * https://developers.google.com/maps/documentation/javascript/events
