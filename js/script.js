@@ -51,7 +51,7 @@ function fetchGeoImgs(lat,long,radius)
                   var lat1 = parseFloat(jsonObj2.photo.location.latitude);
                   var lng1 = parseFloat(jsonObj2.photo.location.longitude);
 
-                  addMarker(lat1,lng1,photoArr[ii].title); console.log("marker added for ",i);
+                  addMarker(lat1,lng1,photoArr[ii]); console.log("marker added for ",i);
 
                   console.log("PHOTO ARR",photoArr[ii]);
                   addInfoWindow(markers[i], photoArr[ii]);
@@ -177,15 +177,19 @@ function initMap() {
     ]
 
   });
-  var marker = new google.maps.Marker({
-    position: uluru,
-    map: map
+  var infowindow = new google.maps.InfoWindow({
+    content: "HEYYYYYYYYY"
   });
 
-  var marker = new google.maps.Marker({
-    position: {lat: 0, lng: 0},
-    map: map
+  var marker1 = new google.maps.Marker({
+    position: uluru,
+    map: map,
+    title: 'Uluru (Ayers Rock)'
   });
+  marker1.addListener('click', function() {
+    infowindow.open(map, marker1);
+  });
+
 
   //----- In this example code, the map zooms when clicked
   map.addListener('click', function() {
@@ -214,13 +218,21 @@ function initMap() {
 }
 
 
-function addMarker(lat1,lng1,name) {
+function addMarker(lat1,lng1,photo) {
   var marker = new google.maps.Marker({
     position: {lat: lat1, lng: lng1},
     map: map,
-    title: name,
+    title: photo.title,
     animation: google.maps.Animation.DROP,
     icon: pinIcon
+  });
+  var format = "_n"
+  var infowindow = new google.maps.InfoWindow({
+    content: '<IMG BORDER="0" ALIGN="Left" SRC="https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + format + '.jpg;">'
+  });
+
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
   });
 
   markers.push(marker);
@@ -229,8 +241,10 @@ function addMarker(lat1,lng1,name) {
 function addInfoWindow(marker, photo) {
 
   var infoWindow = new google.maps.InfoWindow({
-      content: '<IMG BORDER="0" ALIGN="Left" SRC="https://farm' + photo.farm + '.static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + photo.format + '.jpg;">'
-  });
+      //content: '<IMG BORDER="0" ALIGN="Left" SRC="https://farm' + photo.farm + '.static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + photo.format + '.jpg;">'
+      //content: '<IMG BORDER="0" ALIGN="Left" SRC="images/iconSmall.png">'
+      //content: "Hello!"
+    });
 
   google.maps.event.addListener(marker, 'click', function () {
       infoWindow.open(map, marker);
