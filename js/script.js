@@ -41,7 +41,7 @@ function initMap() {
     center: uluru,
     disableDefaultUI: true, //disables default UI, streetview doesn't make sense within this app.
     styles: [
-      {elementType: 'geometry', stylers: [{color: '#AC9FBB'}]},
+      {elementType: 'geometry', stylers: [{color: '#9B454B'}]},
       {elementType: 'labels.text.stroke', stylers: [{color: '#000000'}]},
       {elementType: 'labels.text.fill', stylers: [{color: '#F7EBEC'}]},
       {
@@ -57,7 +57,7 @@ function initMap() {
       {
         featureType: 'poi.park',
         elementType: 'geometry',
-        stylers: [{color: '#59656F'}]
+        stylers: [{color: '#BF5725'}]
       },
       {
         featureType: 'poi.park',
@@ -67,7 +67,7 @@ function initMap() {
       {
         featureType: 'road',
         elementType: 'geometry',
-        stylers: [{color: '#8F8F8F'}]
+        stylers: [{color: '#F2A97B'}]
       },
       {
         featureType: 'road',
@@ -82,7 +82,7 @@ function initMap() {
       {
         featureType: 'road.highway',
         elementType: 'geometry',
-        stylers: [{color: '#1D1E2C'}]
+        stylers: [{color: '#220901'}]
       },
       {
         featureType: 'road.highway',
@@ -97,7 +97,7 @@ function initMap() {
       {
         featureType: 'transit',
         elementType: 'geometry',
-        stylers: [{color: '#DDBDD5'}]
+        stylers: [{color: '#6D2E2F'}]
       },
       {
         featureType: 'transit.station',
@@ -107,7 +107,7 @@ function initMap() {
       {
         featureType: 'water',
         elementType: 'geometry',
-        stylers: [{color: '#6395B0'}]
+        stylers: [{color: '#5E7393'}]
       },
       {
         featureType: 'water',

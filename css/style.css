@@ -15,7 +15,7 @@ header{
 
 .pagetitle{
 	font-family: 'Questrial', sans-serif;
-	color: #1D1E2C;
+	color: #220901;
 	text-align: center;
 	position: relative;
     padding: 25px;
@@ -33,7 +33,7 @@ header{
 
 .footer{
 	text-align: center;
-	color: #1D1E2C;
+	color: #220901;
     background-color:#F7EBEC;
     padding: 15px;
     font-family: 'Questrial', sans-serif;
@@ -44,4 +44,14 @@ header{
 #map{
     height: 80vh;
     width: 100%;
+}
+
+.eye_img{
+	max-width: 30%;
+	max-height: 30%;
+	float: left;
+}
+
+.copyright{
+	font-size: 12px;
 }

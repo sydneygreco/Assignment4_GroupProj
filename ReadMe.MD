@@ -5,15 +5,25 @@ Hot Spot is a website that generates a map of the hottest location to take a pic
 
 ## Style Guide
 ### Colour Pallete Hex Values
-* #F7EBEC - Isabelline (Header and Foot BGC)
-* #DDBDD5 - Thistle (Transit)
-* #AC9FBB - Pastel Purple (Land)
-* #59656F - Black Coral (Parks)
-* #1D1E2C - Dark Gunmetal (Highways and Text Color)
-* #8F8F8F - Taupe Gray (Roads)
-* #6395B0 - Rackley (Water)
-* #FFFFFF - White
+* #F7EBEC - Isabelline (Header, Footer BGC and Text Fill)
+* #9B454B - Smokey Topaz (Land)
+* #BF5725 - Bittersweet Shimmer (Parks)
+* #F2A97B - Middle Yellow Red (Roads)
+* #220901 - Smokey Black (Highways and Text)
+* #6D2E2F - Wine (Transit)
+* #5E7393 - UCLA Blue (Water)
 * #000000 - Black
+
+### Colourblind Conversions of Hex Values
+* #A63603 (Highway)
+* #E6550D (Transit)
+* #FDAE6B (Parks)
+* #FDAE6C (Roads)
+* #FDD0A2 (Land)
+* #5E7393 (Water)
+
+
+
 ### Fonts 
 Questrial pulled from Google Fonts
 
