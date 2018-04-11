@@ -2,24 +2,20 @@ window.onload = init();
 
 var map;
 var markers = [];
-var pinIcon = "images/iconSmall.png";
+var heat = []
+var pinIcon = "images/iconxSmall.png";
 
 
 function init() {
   
-  var lat = 49.728668;
-  var long = -112.804588;
-  var radius = 5;
-
-	//fetchGeoImgs(lat,long,radius);
-	
+  var remove = document.getElementById('remove');
+  //remove.onclick = deleteMarkers();
 }
 
 function fetchGeoImgs(lat,long,radius)
 {
   var xhr = new XMLHttpRequest();
   var flickrQuery = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d3f2a78f874a236b04846f0422b43e20&has_geo=1&lat="+lat+"&lon="+long+"&radius="+radius+"&per_page=8&page=1&format=json&nojsoncallback=1"; 
-  //"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=5c13c64075f89a68cebb8609bd8852a1&lat="+lat+"&lon="+long+"&radius="+radius+"&format=json&nojsoncallback=1&auth_token=72157689749217830-736010859c60003a&api_sig=43f2e8a80e2f0358d4c0988122452c8a";
 	xhr.open("GET", flickrQuery, true);
   xhr.send(null);
   
@@ -51,10 +47,12 @@ function fetchGeoImgs(lat,long,radius)
                   var lat1 = parseFloat(jsonObj2.photo.location.latitude);
                   var lng1 = parseFloat(jsonObj2.photo.location.longitude);
 
-                  addMarker(lat1,lng1,photoArr[ii]); console.log("marker added for ",i);
+                  var Coor = new google.maps.LatLng(lat1, lng1);
+                  heat.push(Coor);
 
-                  console.log("PHOTO ARR",photoArr[ii]);
-                  addInfoWindow(markers[i], photoArr[ii]);
+
+                  addMarker(lat1,lng1,photoArr[ii]);
+                  console.log("PHOTO ARRAY EL ",photoArr[ii],"marker added for ", ii);
                 } 
               }
             },1000);
@@ -64,39 +62,16 @@ function fetchGeoImgs(lat,long,radius)
   }
 }
 
-/*
-function getImageLocation(ID){
-  var lat1;
-  var lng;
-
-  var locationRequest = new XMLHttpRequest();
-  var locationQuery = "https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=d3f2a78f874a236b04846f0422b43e20&photo_id="+ID+"&format=json&nojsoncallback=1";
-  locationRequest.open("GET", locationQuery, true);
-  locationRequest.send(null);
-  locationRequest.onload = function()
-  {
-    if(locationRequest.status == 200)
-    {
-      var jsonObj2 = JSON.parse(locationRequest.responseText);
-      //lat1 = parseFloat(jsonObj2.photo.location.latitude);
-      //lng = parseFloat(jsonObj2.photo.location.longitude);
-      lat1 = jsonObj2.photo.location.latitude;
-      //var coordinates = new google.maps.LatLng(lat,lng);
-      //return [lat,lng];
-    } 
-  }
-  return lat1;
-}
-*/
-
 function initMap() {
   var uluru = {lat: -25.363, lng: 131.044};
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
-    center: {lat: 51.0486, lng: -114.0708},
+    //center: {lat: 51.0486, lng: -114.0708},
+    center: {lat: 37.774546, lng: -122.433523},
     disableDefaultUI: true, //disables default UI, streetview doesn't make sense within this app.
+    
     styles: [
-      {elementType: 'geometry', stylers: [{color: '#9B454B'}]},
+      {elementType: 'geometry', stylers: [{color: '#d6d6d6'}]},
       {elementType: 'labels.text.stroke', stylers: [{color: '#000000'}]},
       {elementType: 'labels.text.fill', stylers: [{color: '#F7EBEC'}]},
       {
@@ -112,7 +87,7 @@ function initMap() {
       {
         featureType: 'poi.park',
         elementType: 'geometry',
-        stylers: [{color: '#BF5725'}]
+        stylers: [{color: '#8c7f80'}]
       },
       {
         featureType: 'poi.park',
@@ -177,6 +152,7 @@ function initMap() {
     ]
 
   });
+
   var infowindow = new google.maps.InfoWindow({
     content: "HEYYYYYYYYY"
   });
@@ -203,6 +179,21 @@ function initMap() {
 
 
     fetchGeoImgs(loc.lat ,loc.lng ,2);
+  });
+
+  map.addListener('dblclick', function() {
+
+
+    var heatmapData = [];
+
+    heatmapData = heat;
+    
+
+    heatmap = new google.maps.visualization.HeatmapLayer({
+      //data: getPoints()
+      data: heatmapData
+    });
+    heatmap.setMap(map);
   });
 
   map.addListener('idle', function() {
@@ -260,14 +251,6 @@ function deleteMarkers() {
   console.log("DELETED");
 }
 
-
-
-
-
-
-
-
-
 // handy functions to build the url of an image according to its size
 function getImageUrl (photo, format) {
 	return "https://farm" + photo.farm + ".static.flickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + format + ".jpg";
@@ -300,3 +283,7 @@ function calc_precision (zoom) {
 
 	return [fixedAmount, size];
 }
+
+function getPoints() {
+  return markers;
+  }

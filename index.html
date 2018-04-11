@@ -22,7 +22,9 @@
 		<footer role = "contentinfo">
 			<div class="footer"> 
 				<!-- Not sure what to link the <a> tag back to for the colour blind switch button, added the tag and added the colour blind values to the ReadMe. Let me know how this goes -Sydney -->
-				<a><img class = "eye_img" src = "images/eye.png" alt = "Eye icon"> </a>
+				<a id = "colour-blind"><img class = "eye_img" src = "images/eye.png" alt = "Colour-Blindess Mode icon"> </a>
+				<a id = "remove"><img class = "eye_img" src = "images/garbage.png" alt = "Remove Markers icon"> </a>
+
 				<!-- Eye image from http://www.clker.com/clipart-30030.html -->
 				<h3>Hot Spot is a website that generates a map of the hottest location to take a picture. Just click to load pictures in!</h3>
 				<div class = "copyright">
@@ -33,7 +35,7 @@
 		</footer>
 
     
-	   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHdTS--sHSGI5Cug45VaTRxZSApB8du3A&callback=initMap" async defer></script>
+	   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHdTS--sHSGI5Cug45VaTRxZSApB8du3A&libraries=visualization&callback=initMap" async defer></script>
 	   <script type="text/javascript" src="js/script.js"></script> <!-- Just a heads up, don't put the JS file before the map API call, or bad things happen -Brett -->
 	</body>
 	</html>

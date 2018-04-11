@@ -47,8 +47,8 @@ header{
 }
 
 .eye_img{
-	max-width: 30%;
-	max-height: 30%;
+	margin-right: 10px;
+	max-width: 30px;
 	float: left;
 }
 
