@@ -2,15 +2,17 @@ window.onload = init();
 
 var map;
 var markers = [];
-var heat = []
+var heat = [];
 var pinIcon = "images/iconxSmall.png";
 
 
 function init() {
   
-  var remove = document.getElementById('remove');
+  //var remove = document.getElementById('remove');
+  //remove.addEventListener("click", myFunction);
   //remove.onclick = deleteMarkers();
 }
+
 
 function fetchGeoImgs(lat,long,radius)
 {
@@ -63,17 +65,85 @@ function fetchGeoImgs(lat,long,radius)
 }
 
 function initMap() {
-  var uluru = {lat: -25.363, lng: 131.044};
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
-    //center: {lat: 51.0486, lng: -114.0708},
-    center: {lat: 37.774546, lng: -122.433523},
+    center: {lat: 49.728668, lng: -112.804588},
     disableDefaultUI: true, //disables default UI, streetview doesn't make sense within this app.
     
     styles: [
-      {elementType: 'geometry', stylers: [{color: '#d6d6d6'}]},
-      {elementType: 'labels.text.stroke', stylers: [{color: '#000000'}]},
+      {elementType: 'geometry', stylers: [{color: '#FBFCFC'}]},
+      {elementType: 'labels.text.stroke', stylers: [{color: '#748591'}]},
       {elementType: 'labels.text.fill', stylers: [{color: '#F7EBEC'}]},
+      {
+        "featureType": "administrative.land_parcel",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.business",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road.arterial",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road.local",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road.local",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
       {
         featureType: 'administrative.locality',
         elementType: 'labels.text.fill',
@@ -87,7 +157,7 @@ function initMap() {
       {
         featureType: 'poi.park',
         elementType: 'geometry',
-        stylers: [{color: '#8c7f80'}]
+        stylers: [{color: '#B6D8CF'}]
       },
       {
         featureType: 'poi.park',
@@ -97,12 +167,12 @@ function initMap() {
       {
         featureType: 'road',
         elementType: 'geometry',
-        stylers: [{color: '#F2A97B'}]
+        stylers: [{color: '#C7D2DC'}]
       },
       {
         featureType: 'road',
         elementType: 'geometry.stroke',
-        stylers: [{color: '#000000'}]
+        stylers: [{color: '#748591'}]
       },
       {
         featureType: 'road',
@@ -112,12 +182,12 @@ function initMap() {
       {
         featureType: 'road.highway',
         elementType: 'geometry',
-        stylers: [{color: '#220901'}]
+        stylers: [{color: '#FCAC8D'}]
       },
       {
         featureType: 'road.highway',
         elementType: 'geometry.stroke',
-        stylers: [{color: '#000000'}]
+        stylers: [{color: '#748591'}]
       },
       {
         featureType: 'road.highway',
@@ -127,7 +197,7 @@ function initMap() {
       {
         featureType: 'transit',
         elementType: 'geometry',
-        stylers: [{color: '#6D2E2F'}]
+        stylers: [{color: '#55626B'}]
       },
       {
         featureType: 'transit.station',
@@ -137,7 +207,7 @@ function initMap() {
       {
         featureType: 'water',
         elementType: 'geometry',
-        stylers: [{color: '#5E7393'}]
+        stylers: [{color: '#A7C1D3'}]
       },
       {
         featureType: 'water',
@@ -147,38 +217,21 @@ function initMap() {
       {
         featureType: 'water',
         elementType: 'labels.text.stroke',
-        stylers: [{color: '#000000'}]
+        stylers: [{color: '#A7C1D3'}]
       }
     ]
 
   });
-
-  var infowindow = new google.maps.InfoWindow({
-    content: "HEYYYYYYYYY"
-  });
-
-  var marker1 = new google.maps.Marker({
-    position: uluru,
-    map: map,
-    title: 'Uluru (Ayers Rock)'
-  });
-  marker1.addListener('click', function() {
-    infowindow.open(map, marker1);
-  });
-
 
   //----- In this example code, the map zooms when clicked
   map.addListener('click', function() {
 
     var loc = new google.maps.LatLng;
     loc = (map.getCenter()).toJSON();
-
-    //map.setZoom(8);
-    //addMarker(new google.maps.LatLng(37.7699298, -122.4469157));
-    //deleteMarkers();
+    map.setZoom(14);
 
 
-    fetchGeoImgs(loc.lat ,loc.lng ,2);
+    fetchGeoImgs(loc.lat ,loc.lng ,4);
     
     setTimeout(function(){ var heatmapData = [];
 
@@ -193,24 +246,19 @@ function initMap() {
     
   });
 
-  map.addListener('dblclick', function() {
-
-
-    deleteMarkers();
+  var remove = document.getElementById('remove');
+  remove.addEventListener("click", function() {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+      console.log(i);
+    } 
   });
 
-  map.addListener('idle', function() {
-    //var loc = new google.maps.LatLng;
-    //loc = (map.getCenter()).toJSON();
-    //loc = loc.toJSON();
-    //console.log("location",loc);
-    //fetchGeoImgs(loc.lat ,loc.lng ,1);
-  });
+  //remove.onclick = deleteMarkers();
 
   //https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple note to self, look into info windows.
   //https://developers.google.com/maps/documentation/javascript/reference?hl=es
 }
-
 
 function addMarker(lat1,lng1,photo) {
   var marker = new google.maps.Marker({
@@ -220,9 +268,14 @@ function addMarker(lat1,lng1,photo) {
     animation: google.maps.Animation.DROP,
     icon: pinIcon
   });
-  var format = "_n"
+
+  var format = "_n" //Asks the flicker API for a normal sized image.
   var infowindow = new google.maps.InfoWindow({
-    content: '<IMG BORDER="0" ALIGN="Left" SRC="https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + format + '.jpg;">'
+    content: 
+    '<div class="infoItem"> <br> <a href="https://www.flickr.com/photos/'+photo.owner+'/'+photo.id+'">' +
+    '<IMG BORDER="0" ALIGN="Left" SRC="https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + format + '.jpg;">'+
+    '<br> <h5> "'+photo.title+'"</h5'+
+    '</a> </div>'
   });
 
   marker.addListener('click', function() {
@@ -246,11 +299,13 @@ function addInfoWindow(marker, photo) {
 }
 
 function deleteMarkers() {
+  
   for (var i = 0; i < markers.length; i++) {
-    markers[i].setMap(null);
+    //markers[i].setMap(null);
+    console.log(markers[i]);
   } 
-  markers = [];
-
+  //markers = [];
+  //map.clear();
   console.log("DELETED");
 }
 
